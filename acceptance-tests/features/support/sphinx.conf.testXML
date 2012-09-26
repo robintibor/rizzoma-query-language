@@ -14,7 +14,7 @@
 source source_main_dev
 {
     type = xmlpipe2
-    xmlpipe_command = cat /home/robintibor/work/rizzoma-query-language/test/acceptance-tests/features/support/emptyXML.xml
+    xmlpipe_command = cat /home/robintibor/work/rizzoma-query-language/acceptance-tests/features/support/testXML.xml
     xmlpipe_fixup_utf8 = 1
 }
 

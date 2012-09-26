@@ -17,8 +17,6 @@ class SphinxQLConnector
                 (err, info)->
                     if (err) then throw err
                     console.log('Done, closing Sphinx Connection.')
-                    mySQLConnection.end()
-                    if (callback?)
-                        callback()
+                    mySQLConnection.end(callback)
                 )
 exports.SphinxQLConnector = SphinxQLConnector
