@@ -13,7 +13,7 @@
 
   convertUserNameToPTags = function(userName) {
     if (userNameIsValid(userName)) {
-      return [userName];
+      return [userName, userName + userName];
     } else {
       return null;
     }
@@ -21,7 +21,7 @@
 
   exports.testConditionForUserIdZero = function(test) {
     test.expect(1);
-    testUserSphinxQLString('0', "ptags IN (0)", test);
+    testUserSphinxQLString('0', "ptags IN (0,00)", test);
     return test.done();
   };
 

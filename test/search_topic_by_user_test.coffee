@@ -8,13 +8,13 @@ userNameIsValid = (userName) ->
 
 convertUserNameToPTags = (userName) ->
     if (userNameIsValid(userName))
-        return [userName]
+        return [userName, userName + userName]
     else
         return null
 
 exports.testConditionForUserIdZero = (test) -> 
     test.expect(1)
-    testUserSphinxQLString('0', "ptags IN (0)", test)
+    testUserSphinxQLString('0', "ptags IN (0,00)", test)
     test.done()
 
 exports.testConditionForInvalidUser = (test) -> 
