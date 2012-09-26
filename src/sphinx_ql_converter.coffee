@@ -6,7 +6,14 @@ class SphinxQLConverter
     
     generateSphinxQLString: (rizzomaQLString) ->
         # For now just dummy for user search
-        rizzomaQLString = 
+        userName = rizzomaQLString.split(':')[1]
+        ptagCondition = @generateConditionForUserId(userName, (userString) ->
+            if (parseInt(userString) >= 0)
+                return [userString, userString + userString]
+            else
+                return null
+            )
+        return "SELECT * FROM #{indexName} WHERE #{ptagCondition}"  
     
     generateConditionForUserId: (userName, convertUserNameToPTags) ->
         pTags = convertUserNameToPTags(userName)
