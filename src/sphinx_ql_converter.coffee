@@ -37,7 +37,7 @@ class SphinxQLConverter
       userWord = "user:"
       index = 0;
       sqlString = ""
-      while index < queryWords.length
+      while (index < queryWords.length)
         sqlWord = ""
 
         # case tag-search
@@ -51,7 +51,7 @@ class SphinxQLConverter
         # case phrase-search
         else if (queryWords[index].indexOf("\"", 0) == 0)
           phrase="";
-          while index < queryWords.length && queryWords[index].indexOf("\"", 0) !=  queryWords[index].length-1
+          while (index < queryWords.length && queryWords[index].indexOf("\"", 0) !=  queryWords[index].length-1)
             phrase += queryWords[index] + " "
             index++
           if (index < queryWords.length)
@@ -61,18 +61,18 @@ class SphinxQLConverter
           sqlWord += " and " + this.generateContentQueryString(phrase)
 
         # case simple-search
-        else if sqlString.length > 1
+        else if (sqlString.length > 1)
           sqlWord = this.generateTitleQueryString(queryWords[index])
           sqlWord += " and " + this.generateContentQueryString(queryWords[index])
 
-        if sqlString.length > 1
+        if (sqlString.length > 1)
           sqlString += " and " + sqlWord
         else
           sqlString += sqlWord
 
         index++
 
-      if sqlString.length == 0
+      if (sqlString.length == 0)
         return ""
       else
         return "select * from #{indexName} where #{sqlString}"
