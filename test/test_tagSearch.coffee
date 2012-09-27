@@ -15,9 +15,16 @@ exports.testTagSearchConverterWithZeroString = (test)->
   query = ""
   test.equal(sphinxQLConverter.gengenerategTagFieldSearchString(""), expectedResult)
   test.done()
+
+exports.testGenerateTitleContentFieldSearchString = (test)->
+  expectedResult = " @(title,content) searchword"
+  query = "searchword"
+  test.equal(sphinxQLConverter.generateTitleContentFieldSearchString(query), expectedResult)
+  test.done()
+
 exports.testConvertStringQueryToSphinxQlQuery = (test)->
   queryString = "#tag1 \"phrase1 phrase2\" word "
-  expectedResult = "select * from #{indexName} where match(' @gtags tag1 @(title, content) \"phrase1 phrase2\" word')"
+  expectedResult = "select * from #{indexName} where match(' @gtags tag1 @(title,content) \"phrase1 phrase2\" word')"
   test.equal(sphinxQLConverter.convertStringQueryToSphinxQlQuery(queryString), expectedResult)
   test.done()
 
@@ -29,6 +36,13 @@ exports.testConvertStringQueryToSphinxQlQueryWithZeroString  = (test)->
 
 exports.testConvertStringQueryToSphinxQlQueryWithPhrase = (test)->
   queryString = "'one two three'"
-  expectedResult = "select * from #{indexName} where match(' @(title, content) \"one two three\"')";
+  expectedResult = "select * from #{indexName} where match(' @(title,content) \"one two three\"')";
   test.equal(sphinxQLConverter.convertStringQueryToSphinxQlQuery(queryString), expectedResult)
+  test.done()
+exports.testConvertStringQueryToSphinxQlQueryWithSingleWord = (test)->
+  queryString = "searchword"
+
+  expectedResult = "select * from #{indexName} where match(' @(title,content) searchword')";
+  test.equal(sphinxQLConverter.convertStringQueryToSphinxQlQuery(queryString), expectedResult)
+  console.log(sphinxQLConverter.convertStringQueryToSphinxQlQuery(queryString))
   test.done()

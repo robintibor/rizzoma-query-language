@@ -21,7 +21,7 @@ class SphinxQLConverter
       if (queryString == null || queryString == '')
         return ""
       else
-        return " @(title, content) #{queryString}"
+        return " @(title,content) #{queryString}"
 
     convertStringQueryToSphinxQlQuery: (queryString)->
       queryString = queryString.trim()
