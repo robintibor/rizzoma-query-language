@@ -22,11 +22,11 @@ Feature: Searching by Rizzoma QL String
             | ptags |
             | 12,14 |
 
-    Scenario: Searching for a word
+    Scenario: Searching for a word in the title
         Given a sphinx engine with records:
             | title      | id  |
             | searchword | 3   |
         When I search for "searchword"
-        Then I should find: 
+        Then I should find:
             | id |
             | 3  |
