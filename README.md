@@ -1,16 +1,9 @@
 Rizzoma Query Language Implementation und Tests
-
-For getting acceptance tests to work, some hardcoded file paths will have to be changed :(
-Direct command (execute in root directory of this project):
+Acceptance tests should work if you ahve cucumber.js installed, just run 
 ```
-find . -regex '\(.*\.sh\)\|\(.*.coffee\)\|\(.*.testXML\)' | xargs sed -i s#\/home\/robintibor\/work\/rizzoma-query-language#YOURPATHTOPROJECT#g
+sudo cake run-acceptance-tests
 ```
-Manual way:
-In the root directory of the project run
-```
-grep -r 'home/' *
-```
-and change all paths to your project paths..
+from the root directory of the project :)
 
 Um mit git repository zu arbeiten:
 
