@@ -9,6 +9,6 @@ Feature: User Search
     Then I should get 0 Results
 
   Scenario: Searching for users that exist
-    Given a sphinx server with 2 records for user 3
-    When I search for user 3
-    Then I should get 2 Results
+    Given the sphinx server has 3 records for user 5
+    When I search for user 5
+    Then I should get 3 Results

@@ -30,10 +30,14 @@ task 'auto-compile-and-test', 'compile src and test on changes, run test on chan
 task 'auto-compile', 'compiles src and test on changes wihtout running tests', ->
     runJitter(['src', 'lib'])
     runJitter(['test', 'test'])
-  
-task 'run-acceptance-tests', 'runs the acceptance tests', ->
-    cucumberTask = spawn('cucumber.js', ['-f', 'pretty', 'acceptance-tests/'],
-    { 
+
+option '', '--feature [Featurename]', 'Featurename to run tests for'
+task 'run-acceptance-tests', 'runs the acceptance tests, have to eb run with sudo', (options)->
+    acceptanceTestPath = 'acceptance-tests/';
+    if (options['feature']?)
+        acceptanceTestPath += "features/#{options['feature']}.feature"
+    cucumberTask = spawn('cucumber.js', ['-f', 'pretty', acceptanceTestPath],
+    {
         env: {'NODE_PATH': '/usr/lib/nodejs:/usr/share/javascript:/usr/lib/node_modules'}
     })
     cucumberTask.stderr.on 'data', (data) ->

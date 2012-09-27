@@ -16,7 +16,7 @@ if [ -e $SPHINX_DELTA ] && [ -e $SPHINX_MAIN ]; then
 fi
 
 sudo service sphinxsearch stop
-sleep 2
+sleep 1
 
 cd $(dirname $0)/../
 
