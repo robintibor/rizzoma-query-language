@@ -25,7 +25,7 @@ stepDefinitions = () ->
         else
             return rowNr + 1 # Ids start from 0 but sphinx doc ids start from 1!
 
-    this.When(/^I search for "([^"]*)"$/, (query, callback) ->
+    this.When(/^I search for: (.*)$/, (query, callback) ->
         this.rizzomaQLSearcher.search(query, (result) =>
             this.searchResult = result
             callback()
