@@ -20,3 +20,13 @@ Feature: Searching by Rizzoma QL String With One Condition
         Then I should find:
             | id |
             | 3  |
+
+    Scenario: Searching for a word in the title of one record
+        Given a sphinx engine with records:
+            | title         | id  |
+            | differentword | 1   |
+            | searchword    | 2   |
+        When I search for: searchword
+        Then I should find:
+            | id |
+            | 2  |
