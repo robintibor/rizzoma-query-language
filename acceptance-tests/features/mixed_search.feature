@@ -3,12 +3,12 @@ Feature: Searching by Rizzoma QL String
     I want to be able to enter a Rizzoma QL Search Request
     And find the correct topics
 
-    Scenario: Searching for a tag
+    Scenario: Searching for a tag and a user (right now assuming ptag = userid!)
         Given a sphinx engine with records:
             | title | ptags    |  gtags |
             | Title   | 12,14  | tag    |
         When I search for "user:12 #tag"
         Then I should find: 
             | ptags   |
-            | 12,14   | 
+            | 12,14   |
 
