@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # First create the xml string, then write it to testXML.xml, then tell sphinx to index it
-testXMLFile="/home/robintibor/work/rizzoma-query-language/acceptance-tests/features/support/testXML.xml" 
+# Change to directory of the bashscript file to be able to call subfiles no matter where the script is called form
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR
+testXMLFile="testXML.xml" 
 documentsXML=$1
 XMLSTART='<?xml version="1.0" encoding="utf-8"?>
 <sphinx:docset>'
@@ -12,13 +15,12 @@ rm $testXMLFile
 
 # Add new Xml to testXMLFile
 echo $XMLSTART>>$testXMLFile
-cat /home/robintibor/work/rizzoma-query-language/acceptance-tests/features/support/search_scheme.xml>>$testXMLFile
+cat search_scheme.xml>>$testXMLFile
 echo "">>$testXMLFile
 echo $documentsXML >> $testXMLFile
 echo $XMLEND >> $testXMLFile
 
 #Now reindex sphinx
-sudo -u sphinxsearch INDEX_TYPE=delta INDEX_SIZE=full indexer --config /home/robintibor/work/rizzoma-query-language/acceptance-tests/features/support/sphinx.conf.testXML --rotate index_delta_dev
+sudo -u sphinxsearch INDEX_TYPE=delta INDEX_SIZE=full indexer --config sphinx.conf.testXML --rotate index_delta_dev
 sudo restart sphinxsearch
 sleep 1
-

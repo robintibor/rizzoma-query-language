@@ -2,13 +2,12 @@ spawn = require('child_process').spawn
 exec = require('child_process').exec
 cucumber_util = require('../support/cucumber_util')
 
-acceptanceTestDirectory = '/home/robintibor/work/rizzoma-query-language/acceptance-tests/'
 
 stepDefinitions = () ->
     this.Given(/^a sphinx server without records$/, (callback) ->
         # remove all data from the server
         # first remove then fill only document schema so that sphinx can be searched
-        removeProcess = spawn(acceptanceTestDirectory + 'features/support/clean_sphinx_index.sh')
+        removeProcess = spawn("#{cucumber_util.getSupportScriptsDirectory()}/clean_sphinx_index.sh")
         removeProcess.on('exit', (code) ->
             if (code == 0)
                 cucumber_util.fillSphinxWithDocuments('', callback);

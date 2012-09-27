@@ -1,4 +1,3 @@
-acceptanceTestDirectory = '/home/robintibor/work/rizzoma-query-language/acceptance-tests/'
 spawn = require('child_process').spawn
 
 failScenarioOrCallbackOnExit = (process, failMessage , callback) ->
@@ -10,7 +9,7 @@ failScenarioOrCallbackOnExit = (process, failMessage , callback) ->
         )
 
 fillSphinxWithDocuments = (sphinxDocumentsString, callback) ->
-    fillScriptName = acceptanceTestDirectory + 'features/support/fill_sphinx_index.sh'
+    fillScriptName = __dirname + '/fill_sphinx_index.sh'
     fillProcess = spawn(fillScriptName,
         [sphinxDocumentsString])
     failScenarioOrCallbackOnExit(fillProcess,
@@ -20,6 +19,10 @@ fillSphinxWithDocuments = (sphinxDocumentsString, callback) ->
 wrapUserNameInArray = (userName) ->
     return [userName]
 
+getSupportScriptsDirectory = () ->
+    return __dirname
+
 exports.failScenarioOrCallbackOnExit = failScenarioOrCallbackOnExit
 exports.fillSphinxWithDocuments = fillSphinxWithDocuments
 exports.wrapUserNameInArray = wrapUserNameInArray
+exports.getSupportScriptsDirectory = getSupportScriptsDirectory

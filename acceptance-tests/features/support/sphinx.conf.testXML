@@ -14,7 +14,7 @@
 source source_main_dev
 {
     type = xmlpipe2
-    xmlpipe_command = cat /home/robintibor/work/rizzoma-query-language/acceptance-tests/features/support/testXML.xml
+    xmlpipe_command = cat testXML.xml # We dont put the full path here because its only for acceptance tests and should be called from the acceptance-tests/feautures/support directory
     xmlpipe_fixup_utf8 = 1
 }
 
