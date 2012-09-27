@@ -7,15 +7,23 @@ stepDefinitions = () ->
     )
     createSphinxDocStringFromTable = (table) ->
         sphinxDocString = ""
-        # Ids start from 0 but sphinx doc ids start from 1!
-        sphinxDocString += createDocStringFromRow(row, id + 1) for row, id in table.hashes()
+        sphinxDocString += createDocStringFromRow(row, rowNr) for row, rowNr in table.hashes()
         return sphinxDocString    
         
-    createDocStringFromRow = (row, id) ->
+    createDocStringFromRow = (row, rowNr) ->
+        id = extractIdOfRow(row, rowNr)
         sphinxDocString = "<sphinx:document id=\"#{id}\">"
         sphinxDocString += "<#{attribute}>#{value}</#{attribute}>"for attribute, value of row
         sphinxDocString += "</sphinx:document>"
         return sphinxDocString
+
+    extractIdOfRow = (row, rowNr) ->
+        if (row["id"]?)
+            id = row["id"]
+            delete row["id"] # delete id so that its not added to xml output!
+            return id;
+        else
+            return rowNr + 1 # Ids start from 0 but sphinx doc ids start from 1!
 
     this.When(/^I search for "([^"]*)"$/, (query, callback) ->
         this.rizzomaQLSearcher.search(query, (result) =>

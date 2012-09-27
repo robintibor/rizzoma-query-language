@@ -15,5 +15,5 @@
     <sphinx:attr name="task_sender_ids" type="multi"/>
     <sphinx:attr name="task_recipient_ids" type="multi"/>
 </sphinx:schema>
-<sphinx:document id="1"><title>Title</title><ptags>12,14</ptags><gtags>tag</gtags></sphinx:document>
+<sphinx:document id="3"><title>searchword</title></sphinx:document>
 </sphinx:docset>
