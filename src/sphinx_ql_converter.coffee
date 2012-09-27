@@ -76,14 +76,16 @@ class SphinxQLConverter
         sqlString += this.generateTitleContentFieldSearchString(titleContentFieldString.substring(1,
                                                                                 titleContentFieldString.length))
       if (sqlString.length!= 0)
-        sqlString = " match('" + sqlString + "')"
+        sqlString = "match('" + sqlString + "')"
       if (pTagsFieldString.length != 0)
+        if (sqlString.length!=0)
+          sqlString+=" and "
         sqlString += this.generateConditionForUserId(pTagsFieldString, (pTagsFieldString)-> return pTagsFieldString)
                                                                                             #TODO: rightfuntction
       if (sqlString.length == 0)
         return ""
       else
-        return "select * from #{indexName} where#{sqlString}"
+        return "select * from #{indexName} where #{sqlString}"
 
 
 
