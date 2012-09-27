@@ -30,7 +30,21 @@ task 'auto-compile-and-test', 'compile src and test on changes, run test on chan
 task 'auto-compile', 'compiles src and test on changes wihtout running tests', ->
     runJitter(['src', 'lib'])
     runJitter(['test', 'test'])
-            
+
+option '', '--feature [Featurename]', 'Featurename to run tests for'
+task 'run-acceptance-tests', 'runs the acceptance tests, have to eb run with sudo', (options)->
+    acceptanceTestPath = 'acceptance-tests/';
+    if (options['feature']?)
+        acceptanceTestPath += "features/#{options['feature']}.feature"
+    cucumberTask = spawn('cucumber.js', ['-f', 'pretty', acceptanceTestPath],
+    {
+        env: {'NODE_PATH': '/usr/lib/nodejs:/usr/share/javascript:/usr/lib/node_modules'}
+    })
+    cucumberTask.stderr.on 'data', (data) ->
+      process.stderr.write data.toString()
+    cucumberTask.stdout.on 'data', (data) ->
+      print data.toString()
+
 option '', '--inputfile [Filename]', 'Filename tof wikipedia xml input file...'
 task 'run-perf', 'run performance test for searching and inserting', (options) ->
     insertTask = spawn('node', ['lib/startInserting.js', options['inputfile']])
