@@ -11,3 +11,12 @@ Scenario: Searching for a tag and a user (right now assuming ptag = userid!)
         Then I should find: 
             | ptags |
             | 12,14 |
+
+Scenario: Searching for a text and a user (right now assuming ptag = userid!)
+        Given a sphinx engine with records:
+            | title | ptags  |
+            | love  | 12,14  |
+        When I search for: user:14 love
+        Then I should find:
+            | ptags |
+            | 12,14 |
