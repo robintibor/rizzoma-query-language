@@ -11,7 +11,7 @@ class SphinxQLConverter
         else
             return "ptags = -1"
 
-    gengenerategTagFieldSearchString: (queryString) ->
+    generategTagFieldSearchString: (queryString) ->
       if (queryString == null || queryString == '')
         return "";
       else
@@ -23,7 +23,7 @@ class SphinxQLConverter
       else
         return " @(title,content) #{queryString}"
 
-    convertStringQueryToSphinxQlQuery: (queryString)->
+    convertStringQueryToSphinxQlQuery: (queryString, convertUserNameToUserId)->
       queryString = queryString.trim()
       queryString = queryString.replace(/\'/g, '"')
       queryWords = queryString.split(" ")
@@ -71,7 +71,7 @@ class SphinxQLConverter
       # summirize all tagFieldStrings to oresult sqlString
       sqlString = ""
       if (gTagsFieldString.length != 0)
-        sqlString = this.gengenerategTagFieldSearchString(gTagsFieldString.substring(1, gTagsFieldString.length))
+        sqlString = this.generategTagFieldSearchString(gTagsFieldString.substring(1, gTagsFieldString.length))
       if (titleContentFieldString.length != 0)
         sqlString += this.generateTitleContentFieldSearchString(titleContentFieldString.substring(1,
                                                                                 titleContentFieldString.length))
@@ -80,8 +80,7 @@ class SphinxQLConverter
       if (pTagsFieldString.length != 0)
         if (sqlString.length!=0)
           sqlString+=" and "
-        sqlString += this.generateConditionForUserId(pTagsFieldString, (pTagsFieldString)-> return pTagsFieldString)
-                                                                                            #TODO: rightfuntction
+        sqlString += this.generateConditionForUserId(pTagsFieldString, convertUserNameToUserId)
       if (sqlString.length == 0)
         return ""
       else
