@@ -8,7 +8,7 @@ Feature: Searching by Rizzoma QL String With One Condition
             | title | id  | gtags |
             | Title | 3   | tag   |
         When I search for: #tag
-        Then I should find: 
+        Then I should find:
             | id |
             | 3  |
     

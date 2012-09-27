@@ -11,3 +11,29 @@ Scenario: Searching for a tag and a user (right now assuming ptag = userid!)
         Then I should find: 
             | ptags |
             | 12,14 |
+
+Scenario: Searching for a text and a user (right now assuming ptag = userid!)
+        Given a sphinx engine with records:
+            | title | ptags  |
+            | love  | 12,14  |
+        When I search for: user:14 love
+        Then I should find:
+            | ptags |
+            | 12,14 |
+
+
+Scenario: Searching for a text and a user and a text! :) (right now assuming ptag = userid!)
+        Given a sphinx engine with records:
+            | title | ptags  |
+            | I love you  | 12,14  |
+        When I search for: I user:14 you
+        Then I should find:
+            | ptags |
+            | 12,14 |
+
+Scenario: Searching for a text and a user and a text that doesn't exist! :) (right now assuming ptag = userid!)
+        Given a sphinx engine with records:
+            | title | ptags  |
+            | I love you  | 12,14  |
+        When I search for: I user:14 them
+        Then I should get 0 Results

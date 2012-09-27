@@ -1,3 +1,17 @@
+Rizzoma Query Language Implementation und Tests
+
+For getting acceptance tests to work, some hardcoded file paths will have to be changed :(
+Direct command (execute in root directory of this project):
+```
+find . -regex '\(.*\.sh\)\|\(.*.coffee\)\|\(.*.testXML\)' | xargs sed -i s#\/home\/robintibor\/work\/rizzoma-query-language#YOURPATHTOPROJECT#g
+```
+Manual way:
+In the root directory of the project run
+```
+grep -r 'home/' *
+```
+and change all paths to your project paths..
+
 Um mit git repository zu arbeiten:
 
 Falls bisher keine eigenen dateien vorhanden:
