@@ -7,7 +7,8 @@ failScenarioOrCallbackOnExit = (process, failMessage , callback) ->
                         callback()
                     else
                         callback.fail(failMessage + "code: #{code}")
-                )
+        )
+
 fillSphinxWithDocuments = (sphinxDocumentsString, callback) ->
     fillScriptName = acceptanceTestDirectory + 'features/support/fill_sphinx_index.sh'
     fillProcess = spawn(fillScriptName,
@@ -16,5 +17,9 @@ fillSphinxWithDocuments = (sphinxDocumentsString, callback) ->
         "Filling Sphinx Indexer with #{sphinxDocumentsString} failed",
         callback)        
 
+wrapUserNameInArray = (userName) ->
+    return [userName]
+
 exports.failScenarioOrCallbackOnExit = failScenarioOrCallbackOnExit
 exports.fillSphinxWithDocuments = fillSphinxWithDocuments
+exports.wrapUserNameInArray = wrapUserNameInArray

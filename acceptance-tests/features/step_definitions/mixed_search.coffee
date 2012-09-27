@@ -5,6 +5,7 @@ stepDefinitions = () ->
       sphinxDocumentsString = createSphinxDocStringFromTable(table)
       cucumber_util.fillSphinxWithDocuments(sphinxDocumentsString, callback)
     )
+
     createSphinxDocStringFromTable = (table) ->
         sphinxDocString = ""
         sphinxDocString += createDocStringFromRow(row, rowNr) for row, rowNr in table.hashes()
@@ -26,9 +27,11 @@ stepDefinitions = () ->
             return rowNr + 1 # Ids start from 0 but sphinx doc ids start from 1!
 
     this.When(/^I search for: (.*)$/, (query, callback) ->
-        this.rizzomaQLSearcher.search(query, (result) =>
-            this.searchResult = result
-            callback()
+        this.rizzomaQLSearcher.search(query,
+            cucumber_util.wrapUserNameInArray,
+            (result) =>
+                this.searchResult = result
+                callback()
         )
     )
 

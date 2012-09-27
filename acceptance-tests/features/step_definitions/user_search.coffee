@@ -1,6 +1,5 @@
 spawn = require('child_process').spawn
 exec = require('child_process').exec
-RizzomaQLSearcher = require('../../../lib/rizzoma_ql_searcher').RizzomaQLSearcher
 cucumber_util = require('../support/cucumber_util')
 
 acceptanceTestDirectory = '/home/robintibor/work/rizzoma-query-language/acceptance-tests/'
@@ -40,16 +39,20 @@ stepDefinitions = () ->
     )
     
     this.When(/^I search for any user$/, (callback) ->
-        this.rizzomaQLSearcher.search('user:13', (result) =>
-            this.searchResult = result
-            callback()
+        this.rizzomaQLSearcher.search('user:13', 
+            cucumber_util.wrapUserNameInArray,
+            (result) =>
+                this.searchResult = result
+                callback()
         )
     )
     
     this.When(/^I search for user (\d+)$/, (userId, callback) ->
-        this.rizzomaQLSearcher.search("user:#{userId}", (result) =>
-            this.searchResult = result
-            callback()
+        this.rizzomaQLSearcher.search("user:#{userId}",
+            cucumber_util.wrapUserNameInArray,
+            (result) =>
+                this.searchResult = result
+                callback()
         )
     )
         

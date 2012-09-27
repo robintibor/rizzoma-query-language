@@ -1,7 +1,7 @@
 (function() {
   var SphinxQLConverter, convertUserNameToPTags, indexName, sphinxQLConverter, testUserSphinxQLString, userNameIsValid;
 
-  SphinxQLConverter = require('../lib/sphinx_ql_converter').SphinxQLConverter;
+  SphinxQLConverter = require('../src/sphinx_ql_converter').SphinxQLConverter;
 
   indexName = 'index_delta_dev';
 

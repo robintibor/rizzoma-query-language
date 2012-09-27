@@ -1,4 +1,4 @@
-RizzomaQLSearcher = require('../../../lib/rizzoma_ql_searcher').RizzomaQLSearcher
+RizzomaQLSearcher = require('../../../src/rizzoma_ql_searcher').RizzomaQLSearcher
 myAroundHooks = () ->
     this.Around((runScenario) ->
         
